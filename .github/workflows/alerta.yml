@@ -1,0 +1,39 @@
+name: Alerta ntfy
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  test:
+    name: Ejecutar prueba (node)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+
+      - name: Install (no deps expected)
+        run: npm ci
+
+      - name: Run Hola Mundo
+        run: npm start
+
+  notify:
+    name: Notificar a ntfy.sh
+    runs-on: ubuntu-latest
+    needs: test
+    if: always()
+    steps:
+      - name: Send ntfy notification
+        run: |
+          RESULT="${{ needs.test.result }}"
+          curl -s -S \
+            -H "Title: GitHub Actions - Push to main" \
+            -H "Priority: high" \
+            -d "Repositorio: $GITHUB_REPOSITORY\nRef: $GITHUB_REF\nActor: $GITHUB_ACTOR\nResultado: $RESULT" \
+            https://ntfy.sh/devops-itla

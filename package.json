@@ -1,0 +1,12 @@
+{
+  "name": "hola-mundo-alerta",
+  "version": "1.0.0",
+  "description": "Hola Mundo con GitHub Actions que notifica a ntfy.sh",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "engines": {
+    "node": ">=16"
+  }
+}
