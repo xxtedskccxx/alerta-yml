@@ -33,7 +33,7 @@ jobs:
         run: |
           RESULT="${{ needs.test.result }}"
           curl -s -S \
-            -H "Title: GitHub Actions - Push to main" \
+            -H "Title: Misael - Push to main" \
             -H "Priority: high" \
-            -d "Repositorio: $GITHUB_REPOSITORY\nRef: $GITHUB_REF\nActor: $GITHUB_ACTOR\nResultado: $RESULT" \
+            -d "Misael\nRepositorio: $GITHUB_REPOSITORY\nRef: $GITHUB_REF\nActor: $GITHUB_ACTOR\nResultado: $RESULT" \
             https://ntfy.sh/devops-itla
